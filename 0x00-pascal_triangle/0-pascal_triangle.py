@@ -9,8 +9,8 @@ def pascal_triangle(n):
         val = 1
         row = []
         for j in range(0, i):
-            row.append(int(val))
-            val = val * (i - j) / (j + 1)
+            row.append(val)
+            val = val * (i - j) // (j + 1)
         row.append(1)
         result.append(row)
     return result
