@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Solve the nqueens problem"""
 import sys
-from typing import List
 
 
 if len(sys.argv) != 2:
@@ -19,7 +18,7 @@ if arg < 4:
     sys.exit(1)
 
 
-def is_safe(board: List[List[int]], row: int, col: int, n: int) -> bool:
+def is_safe(board, row, col, n):
     """Ensure a position is safe to add to solutions"""
     for i in range(row):
         if board[i][col] == 1:
@@ -39,8 +38,7 @@ def is_safe(board: List[List[int]], row: int, col: int, n: int) -> bool:
     return True
 
 
-def solve_n_queens(board: List[List[int]],
-                   col: int, n: int, solutions: List) -> None:
+def solve_n_queens(board, col, n, solutions):
     """Recursive call to backtrack all solutions"""
     if col >= n:
         solution = []
@@ -59,7 +57,7 @@ def solve_n_queens(board: List[List[int]],
             board[i][col] = 0
 
 
-def to_index(solution: List[List[int]]) -> List[List[int]]:
+def to_index(solution):
     """Convert solution format to indexed from board"""
     s_index = []
     for i in range(len(solution)):
@@ -69,10 +67,10 @@ def to_index(solution: List[List[int]]) -> List[List[int]]:
     return s_index
 
 
-def n_queens(n: int) -> None:
+def n_queens(n):
     """main function to call recursive backtracking"""
     board = [[0] * n for _ in range(n)]
-    solutions: List = []
+    solutions = []
     solve_n_queens(board, 0, n, solutions)
     for i in solutions:
         print(to_index(i))
