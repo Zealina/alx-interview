@@ -34,7 +34,6 @@ async function printMovieCharacters (movieId) {
 
     const characters = await fetchCharacters(movie.characters);
 
-    console.log(`Characters in ${movie.title}:`);
     characters.forEach(character => {
       console.log(character);
     });
