@@ -2,4 +2,6 @@
 
 def pascal_triangle(n):
     """Generate Pascal's Triangle"""
-
+    triangle = []
+    if n <= 0:
+        return triangle
