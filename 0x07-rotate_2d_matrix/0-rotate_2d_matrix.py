@@ -2,7 +2,7 @@
 '''Transpose 2d matrix in place'''
 
 
-def rotate_2d_matrix(matrix: list[list[int]]) -> None:
+def rotate_2d_matrix(matrix):
     """Function to rotate matrix"""
     n = len(matrix)
 
