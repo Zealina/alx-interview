@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Dynamic Programming: Coin chnage problem"""
 
+
 def makeChange(coins, total):
     """Return the minimum amount of coins to make total"""
     dp = [total + 1] * (total + 1)
