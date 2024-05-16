@@ -4,7 +4,9 @@
 
 def isWinner(x, nums):
     """Determine the winner in a prime game"""
-    if not x or not nums or type(nums) is not list:
+    if x <= 0 or not nums or type(nums) is not list:
+        return
+    if x != len(nums):
         return
 
     def sieve(n):
