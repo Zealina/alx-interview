@@ -1,50 +1,42 @@
 #!/usr/bin/python3
-"""Prime Games Module"""
+"""0. Prime Game - Maria and Ben are playing a game"""
 
 
 def isWinner(x, nums):
-    """Determine the winner in a prime game"""
-    if x <= 0 or not nums or type(nums) is not list:
-        return
-    if x != len(nums):
-        return
-
-    def sieve(n):
-        """Get all the primes in the number"""
-        is_prime = [True] * (n + 1)
-        p = 2
-        while p * p <= n:
-            if is_prime[p]:
-                for i in range(p * p, n + 1, p):
-                    is_prime[i] = False
-            p += 1
-        prime_list = [p for p in range(2, n + 1) if is_prime[p]]
-        return prime_list
-
-    max_n = max(nums)
-    primes = sieve(max_n)
-
-    def game_winner(n):
-        """Determine the winner of each round"""
-        p_in_s = [p for p in primes if p <= n]
-        maria_turn = True
-        while p_in_s:
-            current_prime = p_in_s[0]
-            p_in_s = [p for p in p_in_s if p % current_prime != 0]
-            maria_turn = not maria_turn
-        return not maria_turn
-
-    maria_wins = 0
-    ben_wins = 0
-
-    for n in nums:
-        if game_winner(n):
-            maria_wins += 1
-        else:
-            ben_wins += 1
-    if maria_wins > ben_wins:
-        return "Maria"
-    elif ben_wins > maria_wins:
-        return "Ben"
-    else:
+    """x - rounds
+    nums - numbers list
+    """
+    if x <= 0 or nums is None:
         return None
+    if x != len(nums):
+        return None
+
+    ben = 0
+    maria = 0
+
+    a = [1 for x in range(sorted(nums)[-1] + 1)]
+    a[0], a[1] = 0, 0
+    for i in range(2, len(a)):
+        rm_multiples(a, i)
+
+    for i in nums:
+        if sum(a[0:i + 1]) % 2 == 0:
+            ben += 1
+        else:
+            maria += 1
+    if ben > maria:
+        return "Ben"
+    if maria > ben:
+        return "Maria"
+    return None
+
+
+def rm_multiples(ls, x):
+    """removes multiple
+    of primes
+    """
+    for i in range(2, len(ls)):
+        try:
+            ls[i * x] = 0
+        except (ValueError, IndexError):
+            break
